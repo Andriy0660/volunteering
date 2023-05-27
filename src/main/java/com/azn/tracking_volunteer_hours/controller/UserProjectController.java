@@ -47,7 +47,7 @@ public class UserProjectController {
                 .projectId(project_id)
                 .build();
         user.setHours(user.getHours()+hours);
-        //user.setHours();
+        user.setScores(user.getScores()+hours*10);
         userService.save(user);
         userProjectService.save(userProject);
 

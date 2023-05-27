@@ -35,6 +35,10 @@ public class User  {
     private String lastname;
     @Column(name = "hours")
     private Integer hours;
+    @Column(name = "scores")
+    private Integer scores;
+    @Column(name = "got_gold_heart")
+    private boolean gotGoldHeart;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonIgnore
 

@@ -4,7 +4,6 @@ import com.azn.tracking_volunteer_hours.service.UserDetailServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -15,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableAspectJAutoProxy
 @EnableScheduling
 public class ApplicationConfiguration {
     private final UserDetailServiceImpl userDetailsService;
