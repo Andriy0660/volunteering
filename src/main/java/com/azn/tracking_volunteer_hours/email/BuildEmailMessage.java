@@ -70,7 +70,7 @@ public class BuildEmailMessage {
                 "            float: left;\n" +
                 "            position: relative;\n" +
                 "            padding: 2em;\n" +
-                "            margin-top: 50px;\n" +
+                "            margin-top: 30px;\n" +
                 "        }\n" +
                 "        .cardLeft {\n" +
                 "            border-top-left-radius: 8px;\n" +
