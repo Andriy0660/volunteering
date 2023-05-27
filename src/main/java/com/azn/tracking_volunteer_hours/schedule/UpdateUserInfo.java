@@ -19,10 +19,15 @@ public class UpdateUserInfo {
         List<User> users = userService.findAll();
         for(User user: users){
             if(user.getHours()>2000 && !user.isGotGoldHeart()){
+//                emailSender.send(
+//                        user.getEmail(),
+//                        BuildEmailMessage.buildEmailHonors(user.getLastname() + " " + user.getFirstname()));
+//               // user.setGotGoldHeart(true);
+//
                 emailSender.send(
                         user.getEmail(),
-                        BuildEmailMessage.buildEmailHonors(user.getLastname() + " " + user.getFirstname()));
-               // user.setGotGoldHeart(true);
+                        BuildEmailMessage.buildEmailTicket()
+                );
             }
         }
     }
