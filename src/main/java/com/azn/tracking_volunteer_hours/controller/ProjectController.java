@@ -54,6 +54,7 @@ public class ProjectController {
                     toList();
         }
 
+
         if(category.equals("All")){
             return ResponseEntity.ok(projects);
         }
