@@ -36,158 +36,159 @@ public class BuildEmailMessage {
 
 
 
-    public static String buildEmailTicket(String userName,String event) {
+    public static String buildEmailTicket(String userName, String event) {
         Random random = new Random();
         int randomNumber = random.nextInt(1000) + 1;
-        return
-                "<!DOCTYPE html>\n" +
-                        "<html>\n" +
-                        "<head>\n" +
-                        "    <title>Movie Ticket</title>\n" +
-                        "    <style>\n" +
-                        "        * {\n" +
-                        "            box-sizing: border-box;\n" +
-                        "        }\n" +
-                        "        html, body {\n" +
-                        "            height: 100%;\n" +
-                        "            margin: 0;\n" +
-                        "        }\n" +
-                        "        body {\n" +
-                        "            font-family: sans-serif;\n" +
-                        "            background-color: #3f32e5;\n" +
-                        "            color: #fff;\n" +
-                        "            display: flex;\n" +
-                        "            justify-content: center;\n" +
-                        "            align-items: center;\n" +
-                        "        }\n" +
-                        "        .cardWrap {\n" +
-                        "            width: 27em;\n" +
-                        "            margin: 3em auto;\n" +
-                        "        }\n" +
-                        "        .card {\n" +
-                        "            background: linear-gradient(to bottom, #e84c3d 0%, #e84c3d 26%, #ecedef 26%, #ecedef 100%);\n" +
-                        "            height: 11em;\n" +
-                        "            float: left;\n" +
-                        "            position: relative;\n" +
-                        "            padding: 1em;\n" +
-                        "            margin-top: 100px;\n" +
-                        "        }\n" +
-                        "        .cardLeft {\n" +
-                        "            border-top-left-radius: 8px;\n" +
-                        "            border-bottom-left-radius: 8px;\n" +
-                        "            width: 16em;\n" +
-                        "        }\n" +
-                        "        .cardRight {\n" +
-                        "            width: 6.5em;\n" +
-                        "            border-left: .18em dashed #fff;\n" +
-                        "            border-top-right-radius: 8px;\n" +
-                        "            border-bottom-right-radius: 8px;\n" +
-                        "        }\n" +
-                        "        .cardRight:before,\n" +
-                        "        .cardRight:after {\n" +
-                        "            content: \"\";\n" +
-                        "            position: absolute;\n" +
-                        "            display: block;\n" +
-                        "            width: .9em;\n" +
-                        "            height: .9em;\n" +
-                        "            background: #fff;\n" +
-                        "            border-radius: 50%;\n" +
-                        "            left: -.5em;\n" +
-                        "        }\n" +
-                        "        .cardRight:before {\n" +
-                        "            top: -.4em;\n" +
-                        "        }\n" +
-                        "        .cardRight:after {\n" +
-                        "            bottom: -.4em;\n" +
-                        "        }\n" +
-                        "        h1 {\n" +
-                        "            font-size: 1.1em;\n" +
-                        "            margin-top: 0;\n" +
-                        "        }\n" +
-                        "        h1 span {\n" +
-                        "            font-weight: normal;\n" +
-                        "        }\n" +
-                        "        .title,\n" +
-                        "        .name,\n" +
-                        "        .seat,\n" +
-                        "        .time {\n" +
-                        "            text-transform: uppercase;\n" +
-                        "            font-weight: normal;\n" +
-                        "        }\n" +
-                        "        .title h2,\n" +
-                        "        .name h2,\n" +
-                        "        .seat h2,\n" +
-                        "        .time h2 {\n" +
-                        "            font-size: .9em;\n" +
-                        "            color: #525252;\n" +
-                        "            margin: 0;\n" +
-                        "        }\n" +
-                        "        .title span,\n" +
-                        "        .name span {\n" +
-                        "            font-size: .7em;\n" +
-                        "            color: #a2aeae;\n" +
-                        "        }\n" +
-                        "        .title {\n" +
-                        "            margin: 2em 0 0 0;\n" +
-                        "        }\n" +
-                        "        .name,\n" +
-                        "        .seat {\n" +
-                        "            margin: .7em 0 0 0;\n" +
-                        "        }\n" +
-                        "        .time {\n" +
-                        "            margin: .7em 0 0 1em;\n" +
-                        "        }\n" +
-                        "        .seat,\n" +
-                        "        .time {\n" +
-                        "            float: left;\n" +
-                        "        }\n" +
-                        "\n" +
-                        "        .number {\n" +
-                        "            text-align: center;\n" +
-                        "            text-transform: uppercase;\n" +
-                        "        }\n" +
-                        "        .number h3 {\n" +
-                        "            color: #e84c3d;\n" +
-                        "            margin: .9em 0 0 0;\n" +
-                        "            font-size: 2.5em;\n" +
-                        "        }\n" +
-                        "        .number span {\n" +
-                        "            display: block;\n" +
-                        "            color: #a2aeae;\n" +
-                        "        }\n" +
-                        "        .barcode {\n" +
-                        "            height: 2em;\n" +
-                        "            width: 0;\n" +
-                        "            margin: 1.2em 0 0 .8em;\n" +
-                        "            box-shadow: 1px 0 0 1px #343434, 5px 0 0 1px #343434, 10px 0 0 1px #343434, 11px 0 0 1px #343434, 15px 0 0 1px #343434, 18px 0 0 1px #343434, 22px 0 0 1px #343434, 23px 0 0 1px #343434, 26px 0 0 1px #343434, 30px 0 0 1px #343434, 35px 0 0 1px #343434, 37px 0 0 1px #343434, 41px 0 0 1px #343434, 44px 0 0 1px #343434, 47px 0 0 1px #343434, 51px 0 0 1px #343434, 56px 0 0 1px #343434, 59px 0 0 1px #343434, 64px 0 0 1px #343434, 68px 0 0 1px #343434, 72px 0 0 1px #343434, 74px 0 0 1px #343434, 77px 0 0 1px #343434, 81px 0 0 1px #343434;\n" +
-                        "        }\n" +
-                        "    </style>\n" +
-                        "</head>\n" +
-                        "<body>\n" +
-                        "<div class=\"cardWrap\">\n" +
-                        "    <div class=\"card cardLeft\">\n" +
-                        "        <h1>Ticket </h1>\n" +
-                        "        <div class=\"title\">\n" +
-                        "            <h2>" + event + "</h2>\n" +
-                        "            <span>EVENT</span>\n" +
-                        "        </div>\n" +
-                        "        <div class=\"name\">\n" +
-                        "            <h2>" + userName + "</h2>\n" +
-                        "            <span>NAME</span>\n" +
-                        "        </div>\n" +
-                        "\n" +
-                        "\n" +
-                        "    </div>\n" +
-                        "    <div class=\"card cardRight\">\n" +
-                        "\n" +
-                        "        <div class=\"number\">\n" +
-                        "            <h3>" + randomNumber + "</h3>\n" +
-                        "            <span>Place</span>\n" +
-                        "        </div>\n" +
-                        "\n" +
-                        "    </div>\n" +
-                        "</div>\n" +
-                        "</body>\n" +
-                        "</html>";
+
+        return "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "    <title>Movie Ticket</title>\n" +
+                "    <style>\n" +
+                "        * {\n" +
+                "            box-sizing: border-box;\n" +
+                "        }\n" +
+                "        html, body {\n" +
+                "            height: 100%;\n" +
+                "            margin: 0;\n" +
+                "        }\n" +
+                "        body {\n" +
+                "            font-family: sans-serif;\n" +
+                "            background-color: #3f32e5;\n" +
+                "            color: #fff;\n" +
+                "            display: flex;\n" +
+                "            justify-content: center;\n" +
+                "            align-items: center;\n" +
+                "        }\n" +
+                "        .cardWrap {\n" +
+                "            width: 54em;\n" +
+                "            margin: 6em auto;\n" +
+                "        }\n" +
+                "        .card {\n" +
+                "            background: linear-gradient(to bottom, #e84c3d 0%, #e84c3d 26%, #ecedef 26%, #ecedef 100%);\n" +
+                "            height: 22em;\n" +
+                "            float: left;\n" +
+                "            position: relative;\n" +
+                "            padding: 2em;\n" +
+                "            margin-top: 200px;\n" +
+                "        }\n" +
+                "        .cardLeft {\n" +
+                "            border-top-left-radius: 8px;\n" +
+                "            border-bottom-left-radius: 8px;\n" +
+                "            width: 32em;\n" +
+                "        }\n" +
+                "        .cardRight {\n" +
+                "            width: 13em;\n" +
+                "            border-left: .36em dashed #fff;\n" +
+                "            border-top-right-radius: 8px;\n" +
+                "            border-bottom-right-radius: 8px;\n" +
+                "        }\n" +
+                "        .cardRight:before,\n" +
+                "        .cardRight:after {\n" +
+                "            content: \"\";\n" +
+                "            position: absolute;\n" +
+                "            display: block;\n" +
+                "            width: 1.8em;\n" +
+                "            height: 1.8em;\n" +
+                "            background: #fff;\n" +
+                "            border-radius: 50%;\n" +
+                "            left: -1em;\n" +
+                "        }\n" +
+                "        .cardRight:before {\n" +
+                "            top: -0.8em;\n" +
+                "        }\n" +
+                "        .cardRight:after {\n" +
+                "            bottom: -0.8em;\n" +
+                "        }\n" +
+                "        h1 {\n" +
+                "            font-size: 1.7em;\n" +
+                "            margin-top: 0;\n" +
+                "        }\n" +
+                "        h1 span {\n" +
+                "            font-weight: normal;\n" +
+                "        }\n" +
+                "        .title,\n" +
+                "        .name,\n" +
+                "        .seat,\n" +
+                "        .time {\n" +
+                "            text-transform: uppercase;\n" +
+                "            font-weight: normal;\n" +
+                "        }\n" +
+                "        .title h2,\n" +
+                "        .name h2,\n" +
+                "        .seat h2,\n" +
+                "        .time h2 {\n" +
+                "            font-size: 1.3em;\n" +
+                "            color: #525252;\n" +
+                "            margin: 0;\n" +
+                "        }\n" +
+                "        .title span,\n" +
+                "        .name span {\n" +
+                "            font-size: 0.9em;\n" +
+                "            color: #a2aeae;\n" +
+                "        }\n" +
+                "        .title {\n" +
+                "            margin: 3em 0 0 0;\n" +
+                "        }\n" +
+                "        .name,\n" +
+                "        .seat {\n" +
+                "            margin: 1.4em 0 0 0;\n" +
+                "        }\n" +
+                "        .time {\n" +
+                "            margin: 1.4em 0 0 2em;\n" +
+                "        }\n" +
+                "        .seat,\n" +
+                "        .time {\n" +
+                "            float: left;\n" +
+                "        }\n" +
+                "\n" +
+                "        .number {\n" +
+                "            text-align: center;\n" +
+                "            text-transform: uppercase;\n" +
+                "        }\n" +
+                "        .number h3 {\n" +
+                "            color: #e84c3d;\n" +
+                "            margin: 1.8em 0 0 0;\n" +
+                "            font-size: 5em;\n" +
+                "        }\n" +
+                "        .number span {\n" +
+                "            display: block;\n" +
+                "            color: #a2aeae;\n" +
+                "        }\n" +
+                "        .barcode {\n" +
+                "            height: 4em;\n" +
+                "            width: 0;\n" +
+                "            margin: 2.4em 0 0 1.6em;\n" +
+                "            box-shadow: 2px 0 0 2px #343434, 10px 0 0 2px #343434, 20px 0 0 2px #343434, 22px 0 0 2px #343434, 30px 0 0 2px #343434, 36px 0 0 2px #343434, 44px 0 0 2px #343434, 46px 0 0 2px #343434, 52px 0 0 2px #343434, 60px 0 0 2px #343434, 70px 0 0 2px #343434, 74px 0 0 2px #343434, 82px 0 0 2px #343434, 88px 0 0 2px #343434, 94px 0 0 2px #343434, 102px 0 0 2px #343434, 112px 0 0 2px #343434, 118px 0 0 2px #343434, 128px 0 0 2px #343434, 136px 0 0 2px #343434, 144px 0 0 2px #343434, 148px 0 0 2px #343434, 154px 0 0 2px #343434, 162px 0 0 2px #343434;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<div class=\"cardWrap\">\n" +
+                "    <div class=\"card cardLeft\">\n" +
+                "        <h1>Ticket </h1>\n" +
+                "        <div class=\"title\">\n" +
+                "            <h2>" + event + "</h2>\n" +
+                "            <span>Event</span>\n" +
+                "        </div>\n" +
+                "        <div class=\"name\">\n" +
+                "            <h2>" + userName + "</h2>\n" +
+                "            <span>Name</span>\n" +
+                "        </div>\n" +
+                "\n" +
+                "\n" +
+                "    </div>\n" +
+                "    <div class=\"card cardRight\">\n" +
+                "\n" +
+                "        <div class=\"number\">\n" +
+                "            <h3>" + randomNumber + "</h3>\n" +
+                "            <span>Place</span>\n" +
+                "        </div>\n" +
+                "\n" +
+                "    </div>\n" +
+                "</div>\n" +
+                "</body>\n" +
+                "</html>";
     }
+
 }
