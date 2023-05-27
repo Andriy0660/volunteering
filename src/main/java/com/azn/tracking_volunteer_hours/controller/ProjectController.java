@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,13 +41,36 @@ public class ProjectController {
                 getAuthentication().getPrincipal();
         User user = userDetails.getUser();
         List<UserProject> userProjects= userProjectService.findAllByUserId(user.getId());
-        List<ProjectResponse> projectResponses = null;
+        List<ProjectResponse> projectResponses = new ArrayList<>();
         for(int i=0;i<userProjects.size();i++){
             projectResponses.add(new ProjectResponse(projectService.findById(userProjects.get(i).getProjectId()).orElseThrow(),
                     userProjects.get(i).getDate(),
                     userProjects.get(i).getHours()));
         }
         return ResponseEntity.ok(new ReportResponse(projectResponses,user.getHours()));
+    }
+
+    @GetMapping("/filterByCategory")
+    public ResponseEntity<ReportResponse> filter(@RequestParam("category")String category){
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
+                getAuthentication().getPrincipal();
+        User user = userDetails.getUser();
+        user.getUserProjects().stream().filter(i->i.getCategory().equals(category));
+        List<UserProject> userProjects= userProjectService.findAllByUserId(user.getId());
+       // List<Project> projects = userProjectService.findAllByUserId(user.getId()).
+
+        List<ProjectResponse> projectResponses = new ArrayList<>();
+        Integer hours=0;
+        for(int i=0;i<userProjects.size();i++){
+
+            if(projectService.findById(userProjects.get(i).getProjectId()).orElseThrow().getCategory().equals(category)){
+                hours+=userProjects.get(i).getHours();
+            projectResponses.add(new ProjectResponse(projectService.findById(userProjects.get(i).getProjectId()).orElseThrow(),
+                    userProjects.get(i).getDate(),
+                    userProjects.get(i).getHours()));
+            }
+        }
+        return ResponseEntity.ok(new ReportResponse(projectResponses,hours));
     }
 
 
