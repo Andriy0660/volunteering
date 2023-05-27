@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
     @GetMapping("/")
     public String getMessage(){
-        return "Tracking volunteer hours is running! :) ";
+        return "Tracking volunteer hours is running:) ";
     }
 }
