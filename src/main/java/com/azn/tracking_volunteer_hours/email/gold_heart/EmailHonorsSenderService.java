@@ -2,7 +2,6 @@ package com.azn.tracking_volunteer_hours.email.gold_heart;
 
 
 
-import com.azn.tracking_volunteer_hours.email.EmailSender;
 import com.azn.tracking_volunteer_hours.service.UserService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -17,11 +16,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class EmailVerificationService implements EmailSender {
+public class EmailHonorsSenderService implements EmailSender {
 
     private final UserService userService;
     private final static Logger LOGGER = LoggerFactory
-            .getLogger(EmailVerificationService.class);
+            .getLogger(EmailHonorsSenderService.class);
 
     private final JavaMailSender mailSender;
 
@@ -34,7 +33,7 @@ public class EmailVerificationService implements EmailSender {
                     new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(content, true);
             helper.setTo(to);
-            helper.setSubject("Відзнаку Президента України \"Золоте серце\"");
+            helper.setSubject("Відзнака Президента України \"Золоте серце\"");
             helper.setFrom("coco.team.corporation@gmail.com");
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {

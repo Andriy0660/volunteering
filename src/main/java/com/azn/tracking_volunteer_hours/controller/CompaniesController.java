@@ -1,5 +1,7 @@
 package com.azn.tracking_volunteer_hours.controller;
 
+import com.azn.tracking_volunteer_hours.email.BuildEmailMessage;
+import com.azn.tracking_volunteer_hours.email.ticket.EmailTicketSenderService;
 import com.azn.tracking_volunteer_hours.entity.Company;
 import com.azn.tracking_volunteer_hours.entity.Offer;
 import com.azn.tracking_volunteer_hours.entity.User;
@@ -22,6 +24,7 @@ public class CompaniesController {
     private final CompaniesService companiesService;
     private final OffersService offerService;
     private final UserService userService;
+    private final EmailTicketSenderService ticketService;
     @GetMapping("/all")
     public ResponseEntity<List<Company>> getAllCompanies() {
 
@@ -44,6 +47,7 @@ public class CompaniesController {
         }
         user.setScores(user.getScores()-offer.getPrice());
         userService.save(user);
+        ticketService.send(user.getEmail(), BuildEmailMessage.buildEmailTicket(user.getLastname() + user.getFirstname(),offer.getName()));
         return ResponseEntity.ok().build();
     }
 }
