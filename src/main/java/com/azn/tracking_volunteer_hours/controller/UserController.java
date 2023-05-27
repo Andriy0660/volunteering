@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/profile")
 @RequiredArgsConstructor
 public class UserController {
-    @GetMapping("/profile")
+    @GetMapping()
     public ResponseEntity<UserProfileResponse> profile(){
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
                 getAuthentication().getPrincipal();

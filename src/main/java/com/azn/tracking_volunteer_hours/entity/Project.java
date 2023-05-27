@@ -30,7 +30,8 @@ public class Project {
     private String description;
     @Column(name = "start_time")
     private LocalDateTime startTime;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JsonIgnore
     @JoinTable(
             name = "user_projects",
             joinColumns = @JoinColumn(name = "project_id"),

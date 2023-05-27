@@ -36,9 +36,11 @@ public class User  {
     private String lastname;
     @Column(name = "hours")
     private Integer hours;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JsonIgnore
+
     @JoinTable(
-            name = "user_project",
+            name = "user_projects",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )

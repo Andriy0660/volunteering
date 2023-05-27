@@ -11,6 +11,7 @@ public class UserProfileMapper {
         userProfileResponse.setEmail(user.getEmail());
         userProfileResponse.setFirstName(user.getFirstname());
         userProfileResponse.setLastName(user.getLastname());
+        userProfileResponse.setHours(user.getHours());
 
         return userProfileResponse;
     }
