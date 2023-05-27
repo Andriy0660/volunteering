@@ -14,11 +14,11 @@ import java.util.List;
 @Transactional
 public class UserProjectsService {
     private final UserProjectRepository userProjectRepository;
-    public List<UserProject> getProjectsAfterDateByUserId(LocalDateTime time, Long id){
+    public List<UserProject> findAllByDateAfterAndUserId(LocalDateTime time, Long id){
         return userProjectRepository.findAllByDateAfterAndUserId(time,id);
     }
-    public List<UserProject> getProjectsByUserId(Long id){
-        return userProjectRepository.getProjectsByUserId(id);
+    public List<UserProject> findAllByUserId(Long id){
+        return userProjectRepository.findAllByUserId(id);
     }
 
     public void save(UserProject userProject){

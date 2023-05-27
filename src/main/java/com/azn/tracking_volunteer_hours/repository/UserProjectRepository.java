@@ -9,7 +9,8 @@ import java.util.List;
 public interface UserProjectRepository extends JpaRepository<UserProject,Long> {
     //List<UserProject> getProjectsAfterDateByUserId();
     List<UserProject> findAllByDateAfterAndUserId(LocalDateTime time,Long id);
-    List<UserProject> getProjectsByUserId(Long id);
+    List<UserProject> findAllByUserId(Long id);
+    //List<UserProject> getProjectsByUserId(Long id);
 
 
 

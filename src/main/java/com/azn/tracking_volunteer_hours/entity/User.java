@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 @Entity
 @Table(name = "users")
 public class User  {
@@ -45,4 +44,16 @@ public class User  {
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
     List<Project> userProjects;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", hours=" + hours +
+                '}';
+    }
 }

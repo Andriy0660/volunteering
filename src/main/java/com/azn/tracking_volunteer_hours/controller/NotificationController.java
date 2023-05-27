@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/hui")
+@RequestMapping("/notifications")
 public class NotificationController {
     private final ProjectService projectService;
 
-    @GetMapping("/notifications")
+    @GetMapping()
     public ResponseEntity<List<Project>> showFollowingProjects(){
         return ResponseEntity.ok(projectService.findAllProjects()
                 .stream()
