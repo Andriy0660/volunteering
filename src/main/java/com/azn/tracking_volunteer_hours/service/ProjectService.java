@@ -20,4 +20,7 @@ public class ProjectService {
     public List<Project> findAllByStartTimeIsAfter(LocalDateTime now){
         return projectRepository.findAllByStartTimeIsAfter(now);
     }
+   public  List<Project> findAllProjects(){
+        return projectRepository.findAll();
+    }
 }
