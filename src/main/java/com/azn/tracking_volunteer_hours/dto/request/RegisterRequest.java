@@ -26,7 +26,5 @@ public class RegisterRequest {
     @NotBlank(message = "Lastname must be not null")
     @Size(min = 2,max =20, message = "Lastname must be at least 2 characters long and maximum 20 characters.")
     private String lastname;
-    @Pattern(regexp = "^\\+380\\d{9}$", message = "Invalid phone number")
-    @NotBlank(message = "Phone must be not null")
-    private String phone;
+
 }
