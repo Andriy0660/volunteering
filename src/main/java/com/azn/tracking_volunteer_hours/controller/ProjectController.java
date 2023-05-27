@@ -27,11 +27,7 @@ public class ProjectController {
     private final ProjectService projectService;
     private final UserProjectsService userProjectService;
     @GetMapping("/get")
-    public ResponseEntity<List<Project>> getProjects(@RequestParam boolean isFuture) {
-
-        if(isFuture) {
-            return ResponseEntity.ok(projectService.findAllByStartTimeIsAfter(LocalDateTime.now()));
-        }
+    public ResponseEntity<List<Project>> getProjects() {
         return ResponseEntity.ok(projectService.findAllByStartTimeIsBefore(LocalDateTime.now()));
     }
 
