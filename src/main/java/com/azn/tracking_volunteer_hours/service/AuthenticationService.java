@@ -9,15 +9,12 @@ import com.azn.tracking_volunteer_hours.entity.User;
 import com.azn.tracking_volunteer_hours.exception.BadRequestException;
 import com.azn.tracking_volunteer_hours.exception.UnauthorizedException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 
 @Service
@@ -40,6 +37,8 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .email(request.getEmail())
                 .hours(0)
+                .scores(0)
+                .gotGoldHeart(false)
                 .build();
         userService.save(user);
     }

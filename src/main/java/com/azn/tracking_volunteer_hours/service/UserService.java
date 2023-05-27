@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +22,9 @@ public class UserService {
             throw new UsernameNotFoundException("User with this email is not found");
         }
         return optionalUser.get();
+    }
+    public List<User> findAll(){
+        return repository.findAll();
     }
 
     public User findUserById(Long id){
