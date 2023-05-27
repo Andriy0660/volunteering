@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -32,4 +34,11 @@ public class User  {
 
     @Column(name = "last_name", length = 20,nullable = false)
     private String lastname;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_project",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    List<Project> userProjects;
 }
