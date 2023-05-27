@@ -31,13 +31,9 @@ public class AuthenticationService {
     private final UserService userService;
     public void register(RegisterRequest request)
     {
-        String email = request.getEmail();
-
-        if(userService.existsUserByEmail(email)){
+        if(userService.existsUserByEmail(request.getEmail())){
             throw new BadRequestException("The email is already used");
         }
-
-
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
@@ -45,7 +41,6 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .build();
         userService.save(user);
-
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
