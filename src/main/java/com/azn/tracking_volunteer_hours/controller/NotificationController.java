@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class NotificationController {
     private final ProjectService projectService;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<Project>> showFollowingProjects(){
         return ResponseEntity.ok(projectService.findAllProjects()
                 .stream()
