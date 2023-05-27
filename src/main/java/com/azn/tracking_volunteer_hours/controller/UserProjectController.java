@@ -46,7 +46,8 @@ public class UserProjectController {
                 .userId(user.getId())
                 .projectId(project_id)
                 .build();
-        user.setHours(hours);
+        user.setHours(user.getHours()+hours);
+        //user.setHours();
         userService.save(user);
         userProjectService.save(userProject);
 

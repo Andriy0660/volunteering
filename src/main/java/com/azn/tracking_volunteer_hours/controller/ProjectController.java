@@ -1,11 +1,11 @@
 package com.azn.tracking_volunteer_hours.controller;
 
+import com.azn.tracking_volunteer_hours.dto.response.ProjectResponse;
 import com.azn.tracking_volunteer_hours.dto.response.ReportResponse;
 import com.azn.tracking_volunteer_hours.entity.Project;
 import com.azn.tracking_volunteer_hours.entity.User;
 import com.azn.tracking_volunteer_hours.entity.UserDetailsImpl;
-import com.azn.tracking_volunteer_hours.exception.BadRequestException;
-import com.azn.tracking_volunteer_hours.mapper.ReportMapper;
+import com.azn.tracking_volunteer_hours.entity.UserProject;
 import com.azn.tracking_volunteer_hours.service.ProjectService;
 import com.azn.tracking_volunteer_hours.service.UserProjectsService;
 import lombok.RequiredArgsConstructor;
@@ -34,56 +34,20 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.findAllByStartTimeIsBefore(LocalDateTime.now()));
     }
 
-    @GetMapping("/filter")
-    public ResponseEntity<ReportResponse> filter(@RequestParam("category")String category,
-                                          @RequestParam("period")Integer period){
-
-        if(period<0||period>12){
-            throw new BadRequestException("Count of months must be between 1 and 12");
-        }
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
-                getAuthentication().getPrincipal();
-        User user = userDetails.getUser();
-        List<Project> projects = null;
-        Integer hours=null;
-        if(period==0){
-            projects=userProjectService.findAllByUserId(user.getId()).stream().
-                    map(i->projectService.findById(i.getProjectId()).orElseThrow()).toList();
-            hours= userProjectService.findAllByUserId(user.getId()).stream()
-                    .map(i->i.getHours()).reduce(0, Integer::sum);
-        }
-        else {
-            projects = userProjectService.findAllByDateAfterAndUserId(LocalDateTime.now().minusMonths(period)
-                    , user.getId()).stream().
-                    map(i -> projectService.findById(i.getProjectId()).orElseThrow()).
-                    toList();
-            hours= userProjectService.findAllByUserId(user.getId()).stream()
-                    .map(i->i.getHours()).reduce(0, Integer::sum);
-        }
-
-
-        final Integer resHours = hours;
-
-
-
-        if(category.equals("All")){
-            return ResponseEntity.ok(new ReportResponse(userProjectService.findAllByUserId(user.getId()).stream()
-                    .map(i -> projectService.findById(i.getProjectId()).orElseThrow()).toList(),resHours));        }
-        return ResponseEntity.ok(new ReportResponse(userProjectService.findAllByUserId(user.getId()).stream()
-                .map(i -> projectService.findById(i.getProjectId()).orElseThrow()).toList(),resHours));
-
-    }
-
     @GetMapping("/report")
     public ResponseEntity<ReportResponse> report(){
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
                 getAuthentication().getPrincipal();
         User user = userDetails.getUser();
-        Integer hours= userProjectService.findAllByUserId(user.getId()).stream()
-                .map(i->i.getHours()).reduce(0, Integer::sum);
-        final Integer resHours = hours;
-        return ResponseEntity.ok(new ReportResponse(userProjectService.findAllByUserId(user.getId()).stream()
-                .map(i -> projectService.findById(i.getProjectId()).orElseThrow()).toList(),resHours));
-
+        List<UserProject> userProjects= userProjectService.findAllByUserId(user.getId());
+        List<ProjectResponse> projectResponses = null;
+        for(int i=0;i<userProjects.size();i++){
+            projectResponses.add(new ProjectResponse(projectService.findById(userProjects.get(i).getProjectId()).orElseThrow(),
+                    userProjects.get(i).getDate(),
+                    userProjects.get(i).getHours()));
+        }
+        return ResponseEntity.ok(new ReportResponse(projectResponses,user.getHours()));
     }
+
+
 }
