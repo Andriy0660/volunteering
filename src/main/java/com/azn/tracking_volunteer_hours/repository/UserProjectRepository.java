@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UserProjectRepository extends JpaRepository<UserProject,Long> {
-    public List<UserProject> findAllByDateAfterAndUser_idIs(LocalDateTime time,Long id);
+    List<UserProject> getProjectsAfterDateByUserId(LocalDateTime time,Long id);
+    List<UserProject> getProjectsByUserId(Long id);
+
+
 
 }

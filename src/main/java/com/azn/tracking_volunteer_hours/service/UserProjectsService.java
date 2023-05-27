@@ -6,16 +6,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class UserProjectsService {
-    private final UserProjectRepository repository;
+    private final UserProjectRepository userProjectRepository;
+    public List<UserProject> getProjectsAfterDateByUserId(LocalDateTime time, Long id){
+        return userProjectRepository.getProjectsAfterDateByUserId(time,id);
+    }
+    public List<UserProject> getProjectsByUserId(Long id){
+        return userProjectRepository.getProjectsByUserId(id);
+    }
 
     public void save(UserProject userProject){
-        repository.save(userProject);
+        userProjectRepository.save(userProject);
     }
+
+
 
 }

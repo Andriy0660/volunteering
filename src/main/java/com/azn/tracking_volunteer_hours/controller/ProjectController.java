@@ -5,112 +5,72 @@ import com.azn.tracking_volunteer_hours.entity.User;
 import com.azn.tracking_volunteer_hours.entity.UserDetailsImpl;
 import com.azn.tracking_volunteer_hours.exception.BadRequestException;
 import com.azn.tracking_volunteer_hours.service.ProjectService;
-import jakarta.validation.Valid;
+import com.azn.tracking_volunteer_hours.service.UserProjectsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/projects")
 @RequiredArgsConstructor
 public class ProjectController {
     private final ProjectService projectService;
+    private final UserProjectsService userProjectService;
     @GetMapping()
     public ResponseEntity<List<Project>> getProjects(@RequestParam boolean isFuture) {
 
         if(isFuture) {
             return ResponseEntity.ok(projectService.findAllByStartTimeIsAfter(LocalDateTime.now()));
         }
-        return ResponseEntity.ok(projectService.findAllByStartTimeIsBefore(LocalDateTime.now()))
+        return ResponseEntity.ok(projectService.findAllByStartTimeIsBefore(LocalDateTime.now()));
     }
 
-    @GetMapping()
-    public ResponseEntity<?> getAvailableCars() {
+    @GetMapping("/filter")
+    public ResponseEntity<List<Project>> filter(@RequestParam("category")String category,
+                                          @RequestParam("period")Integer period){
 
+        if(period<1||period>12){
+            throw new BadRequestException("Count of months must be between 1 and 12");
+        }
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
+                getAuthentication().getPrincipal();
+        User user = userDetails.getUser();
+        List<Project> projects = null;
+        if(period==0){
+            projects=userProjectService.getProjectsByUserId(user.getId()).stream().
+                    map(i->projectService.findById(i.getProject_id()).orElseThrow()).toList();
+        }
+        else {
+            projects = userProjectService.getProjectsAfterDateByUserId(LocalDateTime.now().minusMonths(period)
+                    , user.getId()).stream().
+                    map(i -> projectService.findById(i.getProject_id()).orElseThrow()).
+                    toList();
+        }
 
-return huy;
+        if(category.equals("All")){
+            return ResponseEntity.ok(projects);
+        }
+        return ResponseEntity.ok(projects.stream().filter(i->i.getCategory().equals(category)).toList());
+
     }
 
-    @GetMapping("/owned")
-    public ResponseEntity<List<Car>> getOwnedCars() {
-
+    @GetMapping("/report")
+    public ResponseEntity<List<Project>> report(){
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
                 getAuthentication().getPrincipal();
         User user = userDetails.getUser();
 
-        List<Car> ownedCars = user.getOwnedCars();
-        return ResponseEntity.ok(ownedCars);
-    }
-
-    @GetMapping("/rented")
-    public ResponseEntity<List<Car>> getRentedCars() {
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
-                getAuthentication().getPrincipal();
-        User user = userDetails.getUser();
-        List<Long> integers = bookingService.findAllByRenterId(user.getId())
-                .stream().map(i->i.getCarId()).collect(Collectors.toList());
-
-        return ResponseEntity.ok(carService.findAllByIdIsIn(integers));
-    }
-
-    @PutMapping("/rent")
-    public ResponseEntity<?> rentCar(@RequestParam("id") Long id,
-                                     @RequestParam("startTime") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime startTime,
-                                     @RequestParam("endTime") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime endTime) {
-
-        if (startTime.isAfter(endTime)) {
-            throw new BadRequestException("Start time must be before end time");
-        }
-        if (startTime.isBefore(LocalDateTime.now())) {
-            throw new BadRequestException("Start time must be after now");
-        }
-
-        Car car = carService.findById(id);
-
-        if (!carService.isCarAvailable(car, startTime, endTime)) {
-            throw new ConflictException("This auto is not available for this period");
-        }
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
-                getAuthentication().getPrincipal();
-        User renter = userDetails.getUser();
-        if(renter.isVolunteer()==false){
-            throw new BadRequestException("You are not a volunteer, you can not rent car");
-        }
-        User owner = car.getOwner();
-
-        if (renter.getId().equals(owner.getId())) {
-            throw new BadRequestException("You can not rent your car");
-        }
-
-        Booking booking = new Booking(car.getId(), renter.getId(), startTime, endTime);
-
-        bookingService.save(booking);
-
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(userProjectService.getProjectsByUserId(user.getId()).stream().
+                map(i -> projectService.findById(i.getProject_id()).
+                        orElseThrow()).toList());
     }
 
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addCar(@RequestBody @Valid AddCarRequest carInfo) throws IOException {
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
-                getAuthentication().getPrincipal();
-        User user = userDetails.getUser();
-
-        Car car = CarMapper.mapToAddCar(carInfo);
-        car.setOwner(user);
-
-        car = carService.save(car);
-
-        return ResponseEntity.ok(new CarIdResponse(car.getId()));
-    }
 }

@@ -1,7 +1,6 @@
 package com.azn.tracking_volunteer_hours.service;
 
 import com.azn.tracking_volunteer_hours.entity.Project;
-import com.azn.tracking_volunteer_hours.exception.NotFoundException;
 import com.azn.tracking_volunteer_hours.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,11 +24,11 @@ public class ProjectService {
    public  List<Project> findAllProjects(){
         return projectRepository.findAll();
     }
-    public Project findProjectById(Long id){
-        Optional<Project> project = projectRepository.findById(id);
-        if(project.isEmpty()){
-            throw new NotFoundException("Project with this id is not found");
-        }
-        return project.get();
+    public Optional<Project> findById(Long id){
+        return projectRepository.findById(id);
+    }
+
+    public void save(Project project){
+        projectRepository.save(project);
     }
 }
