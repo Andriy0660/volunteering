@@ -22,7 +22,7 @@ public class UpdateUserInfo {
                 emailSender.send(
                         user.getEmail(),
                         BuildEmailMessage.buildEmailHonors(user.getLastname() + " " + user.getFirstname()));
-              //  user.setGotGoldHeart(true);
+                user.setGotGoldHeart(true);
             }
         }
     }
