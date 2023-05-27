@@ -32,7 +32,4 @@ public class User  {
 
     @Column(name = "last_name", length = 20,nullable = false)
     private String lastname;
-
-
-
 }

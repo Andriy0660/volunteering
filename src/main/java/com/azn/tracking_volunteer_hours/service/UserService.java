@@ -5,9 +5,8 @@ package com.azn.tracking_volunteer_hours.service;
 import com.azn.tracking_volunteer_hours.entity.User;
 import com.azn.tracking_volunteer_hours.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,7 +15,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
     private UserRepository repository;
-    private PasswordEncoder passwordEncoder;
     public User findUserByEmail(String email){
         Optional<User> optionalUser = repository.findByEmail(email);
         if(optionalUser.isEmpty()){
@@ -38,7 +36,8 @@ public class UserService {
     public void save(User user) {
         repository.save(user);
     }
-
+    boolean existsUserByEmail(String email){return repository.existsByEmail(email);}
+    boolean existsByPhone(String phone){return repository.existsByPhone(phone);}
 
 
 }
