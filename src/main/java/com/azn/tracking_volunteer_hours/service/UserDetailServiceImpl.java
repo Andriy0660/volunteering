@@ -1,9 +1,10 @@
 package com.azn.tracking_volunteer_hours.service;
 
 
-import com.example.carsharing.entity.User;
-import com.example.carsharing.entity.UserDetailsImpl;
-import com.example.carsharing.repository.UserRepository;
+
+import com.azn.tracking_volunteer_hours.entity.User;
+import com.azn.tracking_volunteer_hours.entity.UserDetailsImpl;
+import com.azn.tracking_volunteer_hours.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

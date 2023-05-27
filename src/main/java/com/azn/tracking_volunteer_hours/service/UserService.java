@@ -1,10 +1,9 @@
 package com.azn.tracking_volunteer_hours.service;
 
 
-import com.example.carsharing.dto.request.ChangePasswordRequest;
-import com.example.carsharing.dto.request.ChangePhoneRequest;
-import com.example.carsharing.entity.User;
-import com.example.carsharing.repository.UserRepository;
+
+import com.azn.tracking_volunteer_hours.entity.User;
+import com.azn.tracking_volunteer_hours.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,8 +24,7 @@ public class UserService {
         }
         return optionalUser.get();
     }
-    boolean existsUserByEmail(String email){return repository.existsByEmail(email);}
-    boolean existsByPhone(String phone){return repository.existsByPhone(phone);}
+
     public User findUserById(Long id){
         Optional<User> optionalUser = repository.findById(id);
         if(optionalUser.isEmpty()){
@@ -41,19 +39,6 @@ public class UserService {
         repository.save(user);
     }
 
-    public void changePassword(User user, ChangePasswordRequest request){
-        String currentPass = request.getCurrentPassword();
-        String newPass = request.getNewPassword();
 
-        if (!passwordEncoder.matches(currentPass,newPass)){
-            throw new BadCredentialsException("It is wrong password");
-        }
-        user.setPassword(passwordEncoder.encode(newPass));
-        save(user);
-    }
-    public void changePhone(User user, ChangePhoneRequest request){
-        user.setPhone(request.getPhone());
-        save(user);
-    }
 
 }
