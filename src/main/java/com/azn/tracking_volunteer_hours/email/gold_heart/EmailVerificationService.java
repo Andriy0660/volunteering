@@ -27,12 +27,12 @@ public class EmailVerificationService implements EmailSender {
 
     @Override
     @Async
-    public void send(String to, String email) {
+    public void send(String to, String content) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper =
                     new MimeMessageHelper(mimeMessage, "utf-8");
-            helper.setText(email, true);
+            helper.setText(content, true);
             helper.setTo(to);
             helper.setSubject("Відзнаку Президента України \"Золоте серце\"");
             helper.setFrom("coco.team.corporation@gmail.com");

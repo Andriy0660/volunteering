@@ -14,7 +14,7 @@ import java.util.List;
 public class UpdateUserInfo {
     private final UserService userService;
     private final EmailSender emailSender;
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 600)
     public void updateUserRank(){
         List<User> users = userService.findAll();
         for(User user: users){
@@ -22,6 +22,7 @@ public class UpdateUserInfo {
                 emailSender.send(
                         user.getEmail(),
                         BuildEmailMessage.buildEmailHonors(user.getLastname() + " " + user.getFirstname()));
+              //  user.setGotGoldHeart(true);
             }
         }
     }
