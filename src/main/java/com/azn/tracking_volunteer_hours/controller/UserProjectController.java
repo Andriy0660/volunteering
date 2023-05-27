@@ -7,6 +7,7 @@ import com.azn.tracking_volunteer_hours.entity.UserProject;
 import com.azn.tracking_volunteer_hours.exception.BadRequestException;
 import com.azn.tracking_volunteer_hours.service.ProjectService;
 import com.azn.tracking_volunteer_hours.service.UserProjectsService;
+import com.azn.tracking_volunteer_hours.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 public class UserProjectController {
     private final UserProjectsService userProjectService;
     private final ProjectService projectService;
+    private final UserService userService;
     @PostMapping("/contributeHours")
     public ResponseEntity<Void> contributeHours(
             @RequestParam("hour") int hours,
@@ -44,6 +46,8 @@ public class UserProjectController {
                 .user_id(user.getId())
                 .project_id(project_id)
                 .build();
+        user.setHours(hours);
+        userService.save(user);
         userProjectService.save(userProject);
 
         return ResponseEntity.ok().build();

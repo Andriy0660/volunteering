@@ -34,6 +34,8 @@ public class User  {
 
     @Column(name = "last_name", length = 20,nullable = false)
     private String lastname;
+    @Column(name = "hours")
+    private Integer hours;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_project",

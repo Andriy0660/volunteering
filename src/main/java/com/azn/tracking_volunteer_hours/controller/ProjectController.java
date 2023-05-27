@@ -1,9 +1,11 @@
 package com.azn.tracking_volunteer_hours.controller;
 
+import com.azn.tracking_volunteer_hours.dto.response.ReportResponse;
 import com.azn.tracking_volunteer_hours.entity.Project;
 import com.azn.tracking_volunteer_hours.entity.User;
 import com.azn.tracking_volunteer_hours.entity.UserDetailsImpl;
 import com.azn.tracking_volunteer_hours.exception.BadRequestException;
+import com.azn.tracking_volunteer_hours.mapper.ReportMapper;
 import com.azn.tracking_volunteer_hours.service.ProjectService;
 import com.azn.tracking_volunteer_hours.service.UserProjectsService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +35,7 @@ public class ProjectController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<List<Project>> filter(@RequestParam("category")String category,
+    public ResponseEntity<List<ReportResponse>> filter(@RequestParam("category")String category,
                                           @RequestParam("period")Integer period){
 
         if(period<1||period>12){
@@ -43,35 +45,44 @@ public class ProjectController {
                 getAuthentication().getPrincipal();
         User user = userDetails.getUser();
         List<Project> projects = null;
+        Integer hours=null;
         if(period==0){
             projects=userProjectService.getProjectsByUserId(user.getId()).stream().
                     map(i->projectService.findById(i.getProject_id()).orElseThrow()).toList();
+            hours= userProjectService.getProjectsByUserId(user.getId()).stream()
+                    .map(i->i.getHours()).reduce(0, Integer::sum);
         }
         else {
             projects = userProjectService.getProjectsAfterDateByUserId(LocalDateTime.now().minusMonths(period)
                     , user.getId()).stream().
                     map(i -> projectService.findById(i.getProject_id()).orElseThrow()).
                     toList();
+            hours= userProjectService.getProjectsByUserId(user.getId()).stream()
+                    .map(i->i.getHours()).reduce(0, Integer::sum);
         }
+
+
+        final Integer resHours = hours;
+
 
 
         if(category.equals("All")){
-            return ResponseEntity.ok(projects);
+            return ResponseEntity.ok(projects.stream().map(i-> ReportMapper.mapToReportResponse(i,resHours)).toList());
         }
-        return ResponseEntity.ok(projects.stream().filter(i->i.getCategory().equals(category)).toList());
-
+        return ResponseEntity.ok(projects.stream().filter(i->i.getCategory().equals(category))
+                .map(i-> ReportMapper.mapToReportResponse(i,resHours)).toList());
     }
 
     @GetMapping("/report")
-    public ResponseEntity<List<Project>> report(){
+    public ResponseEntity<List<ReportResponse>> report(){
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
                 getAuthentication().getPrincipal();
         User user = userDetails.getUser();
-
-        return ResponseEntity.ok(userProjectService.getProjectsByUserId(user.getId()).stream().
-                map(i -> projectService.findById(i.getProject_id()).
-                        orElseThrow()).toList());
+        Integer hours= userProjectService.getProjectsByUserId(user.getId()).stream()
+                .map(i->i.getHours()).reduce(0, Integer::sum);
+        final Integer resHours = hours;
+        return ResponseEntity.ok(userProjectService.getProjectsByUserId(user.getId()).stream()
+                .map(i -> projectService.findById(i.getProject_id()).
+                        orElseThrow()).map(i-> ReportMapper.mapToReportResponse(i,resHours)).toList());
     }
-
-
 }
