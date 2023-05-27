@@ -47,7 +47,7 @@ public class CompaniesController {
         }
         user.setScores(user.getScores()-offer.getPrice());
         userService.save(user);
-        ticketService.send(user.getEmail(), BuildEmailMessage.buildEmailTicket(user.getLastname() + user.getFirstname(),offer.getName()));
+        ticketService.send(user.getEmail(), BuildEmailMessage.buildEmailTicket(user.getLastname() + " "+ user.getFirstname(),offer.getName()));
         return ResponseEntity.ok().build();
     }
 }
