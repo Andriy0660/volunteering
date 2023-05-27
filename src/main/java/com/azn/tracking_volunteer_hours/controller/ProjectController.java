@@ -22,45 +22,20 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProjectController {
     private final ProjectService projectService;
-    @GetMapping("/available")
+    @GetMapping()
     public ResponseEntity<List<Project>> getProjects(@RequestParam boolean isFuture) {
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
-                getAuthentication().getPrincipal();
-        User user = userDetails.getUser();
 
-        List<Project> projects=null;
-        if(isFuture){
-            projects = projectService.findAllByStartTimeIsAfter(LocalDateTime.now());
+        if(isFuture) {
+            return ResponseEntity.ok(projectService.findAllByStartTimeIsAfter(LocalDateTime.now()));
         }
-
-
-        return ResponseEntity.ok(projects);
+        return ResponseEntity.ok(projectService.findAllByStartTimeIsBefore(LocalDateTime.now()))
     }
 
-    @GetMapping("/availableByTime")
-    public ResponseEntity<?> getAvailableCars(@RequestParam("startTime")
-                                              @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-                                              LocalDateTime startTime,
-                                              @RequestParam("endTime")
-                                              @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-                                              LocalDateTime endTime) {
+    @GetMapping()
+    public ResponseEntity<?> getAvailableCars() {
 
-        if (startTime.isAfter(endTime)) {
-            throw new BadRequestException("Start time must be before end time");
-        }
-        if (startTime.isBefore(LocalDateTime.now())) {
-            throw new BadRequestException("Start time must be after now");
-        }
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
-                getAuthentication().getPrincipal();
-        User user = userDetails.getUser();
-
-        List<Car> availableCars = carService.findAll().stream().
-                filter(i -> carService.isCarAvailable(i, startTime, endTime)).collect(Collectors.toList());
-
-        return ResponseEntity.ok(availableCars.stream().
-                filter(i -> i.getOwner().getId() != user.getId()).toList());
+return huy;
     }
 
     @GetMapping("/owned")
