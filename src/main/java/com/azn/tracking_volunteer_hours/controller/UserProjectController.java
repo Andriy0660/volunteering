@@ -30,7 +30,10 @@ public class UserProjectController {
                 getAuthentication().getPrincipal();
         User user = userDetails.getUser();
 
-        Project project = projectService.findById(project_id).orElseThrow();
+        Project project = projectService.findById(project_id).orElseThrow(
+                () -> new BadRequestException("This project doesn't exist")
+        );
+
         if(project.getStartTime().isAfter(LocalDateTime.now())){
             throw new BadRequestException("This project didn't start yet");
         }
