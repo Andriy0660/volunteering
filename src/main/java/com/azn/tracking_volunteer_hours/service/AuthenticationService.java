@@ -34,13 +34,9 @@ public class AuthenticationService {
     public void register(RegisterRequest request)
     {
         String email = request.getEmail();
-        String phone = request.getPhone();
 
         if(userService.existsUserByEmail(email)){
             throw new BadRequestException("The email is already used");
-        }
-        if(userService.existsByPhone(phone)){
-            throw new BadRequestException("The phone is already used" );
         }
 
 
