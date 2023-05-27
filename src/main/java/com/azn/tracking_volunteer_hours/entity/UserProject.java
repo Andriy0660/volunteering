@@ -22,7 +22,7 @@ public class UserProject {
     @Column(name = "user_id")
     private Long user_id;
 
-    @Column(name = "project_id")
+    @Column(name = "project_gid")
     private Long project_id;
 
     @Column(name = "hours")
