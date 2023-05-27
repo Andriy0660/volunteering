@@ -14,7 +14,7 @@ import java.util.List;
 public class UpdateUserInfo {
     private final UserService userService;
     private final EmailSender emailSender;
-    @Scheduled(fixedRate = 600)
+    @Scheduled(fixedRate = 6000)
     public void updateUserRank(){
         List<User> users = userService.findAll();
         for(User user: users){
