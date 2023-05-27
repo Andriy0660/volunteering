@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
         return ExceptionBuilder.buildExceptionResponse(
                 new NotFoundException("Element not found"), HttpStatus.NOT_FOUND);
     }
-/
+
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<?> handleUserNotFoundException(UsernameNotFoundException ex) {
         return ExceptionBuilder.buildExceptionResponse(ex, HttpStatus.UNAUTHORIZED);
