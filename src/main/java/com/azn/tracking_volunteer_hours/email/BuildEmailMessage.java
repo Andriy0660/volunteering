@@ -66,7 +66,7 @@ public class BuildEmailMessage {
                         "        }\n" +
                         "        .card {\n" +
                         "            background: linear-gradient(to bottom, #e84c3d 0%, #e84c3d 26%, #ecedef 26%, #ecedef 100%);\n" +
-                        "            height: 10em;\n" +
+                        "            height: 11em;\n" +
                         "            float: left;\n" +
                         "            position: relative;\n" +
                         "            padding: 1em;\n" +
@@ -173,7 +173,7 @@ public class BuildEmailMessage {
                         "        </div>\n" +
                         "        <div class=\"name\">\n" +
                         "            <h2>" + userName + "</h2>\n" +
-                        "            <span>name</span>\n" +
+                        "            <span>NAME</span>\n" +
                         "        </div>\n" +
                         "\n" +
                         "\n" +
