@@ -25,7 +25,7 @@ import java.util.List;
 public class ProjectController {
     private final ProjectService projectService;
     private final UserProjectsService userProjectService;
-    @GetMapping()
+    @GetMapping("/get")
     public ResponseEntity<List<Project>> getProjects(@RequestParam boolean isFuture) {
 
         if(isFuture) {
@@ -48,14 +48,14 @@ public class ProjectController {
         Integer hours=null;
         if(period==0){
             projects=userProjectService.getProjectsByUserId(user.getId()).stream().
-                    map(i->projectService.findById(i.getProject_id()).orElseThrow()).toList();
+                    map(i->projectService.findById(i.getProjectId()).orElseThrow()).toList();
             hours= userProjectService.getProjectsByUserId(user.getId()).stream()
                     .map(i->i.getHours()).reduce(0, Integer::sum);
         }
         else {
             projects = userProjectService.getProjectsAfterDateByUserId(LocalDateTime.now().minusMonths(period)
                     , user.getId()).stream().
-                    map(i -> projectService.findById(i.getProject_id()).orElseThrow()).
+                    map(i -> projectService.findById(i.getProjectId()).orElseThrow()).
                     toList();
             hours= userProjectService.getProjectsByUserId(user.getId()).stream()
                     .map(i->i.getHours()).reduce(0, Integer::sum);
@@ -82,7 +82,7 @@ public class ProjectController {
                 .map(i->i.getHours()).reduce(0, Integer::sum);
         final Integer resHours = hours;
         return ResponseEntity.ok(userProjectService.getProjectsByUserId(user.getId()).stream()
-                .map(i -> projectService.findById(i.getProject_id()).
+                .map(i -> projectService.findById(i.getProjectId()).
                         orElseThrow()).map(i-> ReportMapper.mapToReportResponse(i,resHours)).toList());
     }
 }

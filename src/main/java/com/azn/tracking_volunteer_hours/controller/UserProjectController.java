@@ -43,8 +43,8 @@ public class UserProjectController {
         UserProject userProject = UserProject.builder()
                 .date(LocalDateTime.now())
                 .hours(hours)
-                .user_id(user.getId())
-                .project_id(project_id)
+                .userId(user.getId())
+                .projectId(project_id)
                 .build();
         user.setHours(hours);
         userService.save(user);

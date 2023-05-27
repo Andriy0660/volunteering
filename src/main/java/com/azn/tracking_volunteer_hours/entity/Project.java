@@ -32,7 +32,7 @@ public class Project {
     private LocalDateTime startTime;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "user_project",
+            name = "user_projects",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )

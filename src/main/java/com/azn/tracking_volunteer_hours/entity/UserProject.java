@@ -20,10 +20,10 @@ public class UserProject {
     private Long id;
 
     @Column(name = "user_id")
-    private Long user_id;
+    private Long userId;
 
-    @Column(name = "project_gid")
-    private Long project_id;
+    @Column(name = "project_id")
+    private Long projectId;
 
     @Column(name = "hours")
     private Integer hours;

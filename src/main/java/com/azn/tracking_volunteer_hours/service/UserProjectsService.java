@@ -15,7 +15,7 @@ import java.util.List;
 public class UserProjectsService {
     private final UserProjectRepository userProjectRepository;
     public List<UserProject> getProjectsAfterDateByUserId(LocalDateTime time, Long id){
-        return userProjectRepository.getProjectsAfterDateByUserId(time,id);
+        return userProjectRepository.findAllByDateAfterAndUserId(time,id);
     }
     public List<UserProject> getProjectsByUserId(Long id){
         return userProjectRepository.getProjectsByUserId(id);
