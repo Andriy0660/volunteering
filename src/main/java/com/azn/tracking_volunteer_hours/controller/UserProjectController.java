@@ -19,8 +19,8 @@ public class UserProjectController {
     private final UserProjectsService service;
     @PostMapping("/contributeHours")
     public ResponseEntity<Void> contributeHours(
-            @RequestParam int hours,
-            @RequestParam Long project_id
+            @RequestParam("hour") int hours,
+            @RequestParam("project_id") Long project_id
     ){
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().
                 getAuthentication().getPrincipal();
