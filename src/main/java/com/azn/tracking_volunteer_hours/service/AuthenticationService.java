@@ -29,8 +29,6 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     private final UserService userService;
-    @Value("${confirm.registration.url}")
-    private String confirmRegistrationURL;
     public void register(RegisterRequest request)
     {
         String email = request.getEmail();
@@ -47,7 +45,6 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .build();
         userService.save(user);
-        String token = UUID.randomUUID().toString();
 
     }
 
@@ -55,7 +52,7 @@ public class AuthenticationService {
         try {
             if(!checkPassword(request.getPassword(),
                     userService.findUserByEmail(request.getEmail()).getPassword())){
-                throw new UnauthorizedException("Username or password is wrong");
+                throw new UnauthorizedException("Email or password is wrong");
             }
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -63,12 +60,10 @@ public class AuthenticationService {
                     )
             );
         } catch (BadCredentialsException | InternalAuthenticationServiceException e) {
-            throw new UnauthorizedException("Username or password is wrong");
+            throw new UnauthorizedException("Email or password is wrong");
         }
 
-
         var user = userDetailService.loadUserByUsername(request.getEmail());
-
 
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();

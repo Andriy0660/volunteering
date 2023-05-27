@@ -37,7 +37,6 @@ public class UserService {
         repository.save(user);
     }
     boolean existsUserByEmail(String email){return repository.existsByEmail(email);}
-    boolean existsByPhone(String phone){return repository.existsByPhone(phone);}
 
 
 }
