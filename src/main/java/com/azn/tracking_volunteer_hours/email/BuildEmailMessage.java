@@ -251,7 +251,7 @@ public class BuildEmailMessage {
                 "    <div class=\"container\">\n" +
                 "        <h1>Welcome to "+project.getName() +" Project!</h1>\n" +
                 "        </div>\n" +
-                "        <h2><div class=\"project-name(+" + project.getCategory()+ ")\">"+ project.getName() +"</div></h2>\n" +
+                "        <h2><div class=\"project-name(+" + project.getCategory()+ ")\">"+ project.getName() + "will start at " + project.getStartTime()+ ". " +"</div></h2>\n" +
                 "        <h2>Description: " +
                 "            "+ project.getDescription()  +".\n</h2>" +
                 "    <div class=\"container\">\n" +
