@@ -206,6 +206,8 @@ public class BuildEmailMessage {
                 "        }\n" +
                 "\n" +
                 "        .container {\n" +
+                "display:block;\n"+
+                "margin:0 auto;\n"+
                 "            max-width: 600px;\n" +
                 "            margin: 0 auto;\n" +
                 "            background-color: #ffffff;\n" +
@@ -254,11 +256,10 @@ public class BuildEmailMessage {
                 "        <h2><div class=\"project-name(+" + project.getCategory()+ ")\">"+ project.getName() + "will start at " + project.getStartTime()+ ". " +"</div></h2>\n" +
                 "        <h2>Description: " +
                 "            "+ project.getDescription()  +".\n</h2>" +
-                "    <div class=\"container\">\n" +
-                "  <br>  <a href=\"" + "https://send.monobank.ua/jar/618AbMAkJL" + "\" style=\"background-color:#1D70B8;color:#ffffff;font-size:19px;padding:10px 20px;text-decoration:none;border-radius:4px\">Donate to help us now!</a><br><br><br>\n" +
-                "  <img src=\"https://img.pravda.com/images/doc/3/1/31d9bd6-299447088-865779764384214-3597062301583004683-n.jpeg\" alt=\"Project\n" +
-                "        </div>\n" +
-                " style=\"display:block;margin:auto;width:200px;height:200px;margin-top:20px;\">\n" +
+                "    <div class=\"mono\">\n" +
+                "  <br>  <a href=\"" + "https://send.monobank.ua/jar/618AbMAkJL" + "\" style=\"background-color:#1D70B8;color:#ffffff;font-size:19px;padding:10px 20px;text-decoration:none;border-radius:4px\">Donate to help us now!</a><br><br><br>\n </div>" +
+                " <div class=\"container\"> <img src=\"https://img.pravda.com/images/doc/3/1/31d9bd6-299447088-865779764384214-3597062301583004683-n.jpeg\" alt=\"Project\n" +
+                "      </div> " +
                 "       \n" +
                 "        <div class=\"start-time\">Start Time: "+ project.getStartTime() +
                 "    </div>\n" +
