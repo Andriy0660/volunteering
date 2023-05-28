@@ -255,7 +255,7 @@ public class BuildEmailMessage {
                 "        <div class=\"description\">\n" +
                 "            "+ project.getDescription()  +".\n" +
                 "        </div>\n" +
-                "        <div class=\"start-time\">Start Time:"+ project.getStartTime() +
+                "        <div class=\"start-time\">Start Time: "+ project.getStartTime() +
                 "    </div>\n" +
                 "  <br><br>  <a href=\"" + "https://send.monobank.ua/jar/618AbMAkJL" + "\" style=\"background-color:#1D70B8;color:#ffffff;font-size:19px;padding:10px 20px;text-decoration:none;border-radius:4px\">Donate to help us now!</a><br><br>\n" +
                 "  <img src=\"https://img.pravda.com/images/doc/3/1/31d9bd6-299447088-865779764384214-3597062301583004683-n.jpeg\" alt=\"Project\n" +
