@@ -37,12 +37,12 @@ public class UpdateUserInfo {
     public void sendNotification(){
             List<Project> projects = projectService.findAllBySentEmailFalse();
         for(Project project: projects) {
-            if (project.getStartTime().isBefore(LocalDateTime.now().plusDays(7))) {
+            if (project.getStartTime().isBefore(LocalDateTime.now().plusDays(7)) && project.getStartTime().isAfter(LocalDateTime.now())) {
                 List<User> users= userService.findAll();
                 for(User user : users) {
                     emailSender.send(
                             user.getEmail(),
-                            BuildEmailMessage.buildEmailNotification(user.getLastname() + " " + user.getFirstname(),project));
+                            BuildEmailMessage.buildEmailNotification(project));
                 }
                 project.setSentEmail(true);
             }

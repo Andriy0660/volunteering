@@ -192,7 +192,7 @@ public class BuildEmailMessage {
                 "</body>\n" +
                 "</html>";
     }
-    public static String buildEmailNotification(String name, Project project) {
+    public static String buildEmailNotification(Project project) {
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
