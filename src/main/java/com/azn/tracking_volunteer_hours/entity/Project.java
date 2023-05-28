@@ -37,6 +37,9 @@ public class Project {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> users;
+    @Column(name = "is_sent_email")
+    @JsonIgnore
+    private boolean sentEmail;
 
     @Override
     public String toString() {

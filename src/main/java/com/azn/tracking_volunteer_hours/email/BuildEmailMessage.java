@@ -1,5 +1,7 @@
 package com.azn.tracking_volunteer_hours.email;
 
+import com.azn.tracking_volunteer_hours.entity.Project;
+
 import java.util.Random;
 
 public class BuildEmailMessage {
@@ -189,6 +191,74 @@ public class BuildEmailMessage {
                 "</div>\n" +
                 "</body>\n" +
                 "</html>";
+    }
+    public static String buildEmailNotification(String name, Project project) {
+        return "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>"+ project.getName()+"</title>\n" +
+                "    <style>\n" +
+                "        body {\n" +
+                "            font-family: Arial, sans-serif;\n" +
+                "            background-color: #f4f4f4;\n" +
+                "            padding: 20px;\n" +
+                "        }\n" +
+                "\n" +
+                "        .container {\n" +
+                "            max-width: 600px;\n" +
+                "            margin: 0 auto;\n" +
+                "            background-color: #ffffff;\n" +
+                "            border-radius: 5px;\n" +
+                "            padding: 40px;\n" +
+                "            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);\n" +
+                "        }\n" +
+                "\n" +
+                "        h1 {\n" +
+                "            text-align: center;\n" +
+                "            margin-bottom: 20px;\n" +
+                "        }\n" +
+                "\n" +
+                "        .project-name {\n" +
+                "            font-size: 24px;\n" +
+                "            font-weight: bold;\n" +
+                "            margin-bottom: 10px;\n" +
+                "        }\n" +
+                "\n" +
+                "        .category {\n" +
+                "            font-size: 16px;\n" +
+                "            font-weight: bold;\n" +
+                "            margin-bottom: 10px;\n" +
+                "        }\n" +
+                "\n" +
+                "        .description {\n" +
+                "            margin-bottom: 20px;\n" +
+                "        }\n" +
+                "\n" +
+                "        .start-time {\n" +
+                "            font-size: 14px;\n" +
+                "            color: #888888;\n" +
+                "        }\n" +
+                "\n" +
+                "        @media only screen and (max-width: 600px) {\n" +
+                "            .container {\n" +
+                "                padding: 20px;\n" +
+                "            }\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "    <div class=\"container\">\n" +
+                "        <h1>Welcome to "+project.getName() +" Project!</h1>\n" +
+                "        <div class=\"project-name\">Project Name</div>\n" +
+                "        <div class=\"category\">Category</div>\n" +
+                "        <div class=\"description\">\n" +
+                "            "+ project.getDescription()  +".\n" +
+                "        </div>\n" +
+                "        <div class=\"start-time\">Start Time:"+ project.getStartTime() +
+                "    </div>\n" +
+                "</body>\n" +
+                "</html>\n";
     }
 
 }

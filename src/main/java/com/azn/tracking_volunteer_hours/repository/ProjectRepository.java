@@ -11,4 +11,5 @@ public interface ProjectRepository extends JpaRepository<Project,Long> {
     List<Project> findAllByStartTimeIsBefore(LocalDateTime now);
     List<Project> findAllByStartTimeIsAfter(LocalDateTime now);
     Optional<Project> findById(Long aLong);
+    List<Project> findAllBySentEmailFalse();
 }

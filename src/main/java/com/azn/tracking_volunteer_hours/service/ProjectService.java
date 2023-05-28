@@ -31,4 +31,8 @@ public class ProjectService {
     public void save(Project project){
         projectRepository.save(project);
     }
+
+    public List<Project> findAllBySentEmailFalse(){
+        return projectRepository.findAllBySentEmailFalse();
+    }
 }
