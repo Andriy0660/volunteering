@@ -299,12 +299,15 @@ public class BuildEmailMessage {
                 "    <div class=\"container\">\n" +
                 "        <h1>Your statistics for the last 7 days</h1>\n");
                 htmlPage.append("<h2>");
-                htmlPage.append("Total number of hours volunteered for last week: " + reportResponse.getAllHours() + " hours.<br><br>");
+                htmlPage.append("Total number of hours volunteered for last week: " + reportResponse.getAllHours() + " hours.<br><br><h3>");
+                htmlPage.append("</div>");
                 for (int i =0 ; i< reportResponse.getProjectResponses().size();i++){
                     htmlPage.append(reportResponse.getProjectResponses().get(i).getProject().getName() + ": " );
-                    htmlPage.append(reportResponse.getProjectResponses().get(i).getHours() + " hours at");
-                    htmlPage.append(reportResponse.getProjectResponses().get(i).getTime() + "<br><br>");
+                    htmlPage.append(reportResponse.getProjectResponses().get(i).getHours() + " hours at ");
+                    htmlPage.append(reportResponse.getProjectResponses().get(i).getTime() + "<br>");
+
                 }
+                htmlPage.append("</h3>");
 
                 htmlPage.append( "</body>\n" +
                 "</html>\n");
