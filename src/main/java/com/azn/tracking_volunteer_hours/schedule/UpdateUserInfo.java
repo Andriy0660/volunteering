@@ -56,7 +56,7 @@ public class UpdateUserInfo {
             }
         }
     }
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 100000)
     public void sendReport(){
         List<User> users = userService.findAll();
         for(User user: users) {
