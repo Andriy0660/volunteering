@@ -251,16 +251,15 @@ public class BuildEmailMessage {
                 "    <div class=\"container\">\n" +
                 "        <h1>Welcome to "+project.getName() +" Project!</h1>\n" +
                 "        <h2><div class=\"project-name(+" + project.getCategory()+ ")\">"+ project.getName() +"</div></h2>\n" +
-
-                "        <h3><div class=\"description\">\n" +
+                "        <h3>Description: " +
                 "            "+ project.getDescription()  +".\n</h3>" +
                 "        </div>\n" +
-                "        <div class=\"start-time\">Start Time: "+ project.getStartTime() +
-                "    </div>\n" +
-                "  <br><br>  <a href=\"" + "https://send.monobank.ua/jar/618AbMAkJL" + "\" style=\"background-color:#1D70B8;color:#ffffff;font-size:19px;padding:10px 20px;text-decoration:none;border-radius:4px\">Donate to help us now!</a><br><br>\n" +
+                "  <br>  <a href=\"" + "https://send.monobank.ua/jar/618AbMAkJL" + "\" style=\"background-color:#1D70B8;color:#ffffff;font-size:19px;padding:10px 20px;text-decoration:none;border-radius:4px\">Donate to help us now!</a><br><br><br>\n" +
                 "  <img src=\"https://img.pravda.com/images/doc/3/1/31d9bd6-299447088-865779764384214-3597062301583004683-n.jpeg\" alt=\"Project\n" +
                 " style=\"display:block;margin:auto;width:200px;height:200px;margin-top:20px;\">\n" +
                 "       \n" +
+                "        <div class=\"start-time\">Start Time: "+ project.getStartTime() +
+                "    </div>\n" +
                 "</body>\n" +
                 "</html>\n";
     }
