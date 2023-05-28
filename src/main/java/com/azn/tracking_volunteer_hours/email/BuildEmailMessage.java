@@ -212,7 +212,7 @@ public class BuildEmailMessage {
                 "            margin: 0 auto;\n" +
                 "            background-color: #ffffff;\n" +
                 "            border-radius: 5px;\n" +
-                "            padding: 40px;\n" +
+                "            padding: 20x;\n" +
                 "            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);\n" +
                 "        }\n" +
                 "\n" +
@@ -252,7 +252,7 @@ public class BuildEmailMessage {
                 "    <div class=\"container\">\n" +
                 "        <h1>Welcome to "+project.getName() +" Project!</h1>\n" +
                 "        </div>\n" +
-                "        <h2><div class=\"project-name(+" + project.getCategory()+ ")\">"+ project.getName() + " will start at " + project.getStartTime()+ ". " +"</div></h2>\n" +
+                "        <h2><div class=\"project-name(+" + project.getCategory()+ ")\">"+ project.getName() + "will start at " + project.getStartTime()+ ". " +"</div></h2>\n" +
                 "        <h2>Description: " +
                 "            "+ project.getDescription()  +".\n</h2>" +
                 "    <div class=\"mono\">\n" +
@@ -260,6 +260,8 @@ public class BuildEmailMessage {
                 " <div class=\"container\"> <img src=\"https://img.pravda.com/images/doc/3/1/31d9bd6-299447088-865779764384214-3597062301583004683-n.jpeg\" alt=\"Project\n" +
                 "      </div> " +
                 "       \n" +
+                "        <div class=\"start-time\">Start Time: "+ project.getStartTime() +
+                "    </div>\n" +
                 "</body>\n" +
                 "</html>\n";
     }
