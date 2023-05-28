@@ -33,7 +33,7 @@ public class UpdateUserInfo {
             }
         }
     }
-    @Scheduled(fixedRate = 6000)
+    @Scheduled(fixedRate = 600)
     public void sendNotification(){
             List<Project> projects = projectService.findAllBySentEmailFalse();
         for(Project project: projects) {
