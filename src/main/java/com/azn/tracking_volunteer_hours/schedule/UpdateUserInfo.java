@@ -45,6 +45,7 @@ public class UpdateUserInfo {
                             BuildEmailMessage.buildEmailNotification(project));
                 }
                 project.setSentEmail(true);
+                projectService.save(project);
             }
         }
     }
