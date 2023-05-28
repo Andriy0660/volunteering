@@ -293,26 +293,47 @@ public class BuildEmailMessage {
                 "            text-align: center;\n" +
                 "            margin-bottom: 20px;\n" +
                 "        }\n" +
+                "\n" +
+                "        h2 {\n" +
+                "            text-align: center;\n" +
+                "            font-size: 20px;\n" +
+                "            margin-bottom: 10px;\n" +
+                "        }\n" +
+                "\n" +
+                "        h3 {\n" +
+                "            font-size: 16px;\n" +
+                "            margin-bottom: 10px;\n" +
+                "        }\n" +
+                "\n" +
+                "        ul {\n" +
+                "            list-style-type: disc;\n" +
+                "            margin-left: 20px;\n" +
+                "            margin-bottom: 20px;\n" +
+                "        }\n" +
                 "    </style>\n" +
                 "</head>\n" +
                 "<body>\n" +
                 "    <div class=\"container\">\n" +
                 "        <h1>Your statistics for the last 7 days</h1>\n");
-                htmlPage.append("<h2>");
-                htmlPage.append("Total number of hours volunteered for last week: " + reportResponse.getAllHours() + " hours.<br><br><h3>");
-                htmlPage.append("</div>");
-                for (int i =0 ; i< reportResponse.getProjectResponses().size();i++){
-                    htmlPage.append(reportResponse.getProjectResponses().get(i).getProject().getName() + ": " );
-                    htmlPage.append(reportResponse.getProjectResponses().get(i).getHours() + " hours at ");
-                    htmlPage.append(reportResponse.getProjectResponses().get(i).getTime() + "<br>");
+        htmlPage.append("<h2>");
+        htmlPage.append("Total number of hours volunteered for the last week: " + reportResponse.getAllHours() + " hours.</h2><br><br>");
+        htmlPage.append("<h3>Projects:</h3>\n");
+        htmlPage.append("<ul>\n");
+        for (int i = 0; i < reportResponse.getProjectResponses().size(); i++) {
+            htmlPage.append("<li>");
+            htmlPage.append(reportResponse.getProjectResponses().get(i).getProject().getName() + ": ");
+            htmlPage.append(reportResponse.getProjectResponses().get(i).getHours() + " hours at ");
+            htmlPage.append(reportResponse.getProjectResponses().get(i).getTime());
+            htmlPage.append("</li>\n");
+        }
+        htmlPage.append("</ul>\n");
 
-                }
-                htmlPage.append("</h3>");
-
-                htmlPage.append( "</body>\n" +
+        htmlPage.append("</div>");
+        htmlPage.append("</body>\n" +
                 "</html>\n");
 
         return htmlPage.toString();
     }
+
 
 }
