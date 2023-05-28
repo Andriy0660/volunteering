@@ -250,8 +250,8 @@ public class BuildEmailMessage {
                 "<body>\n" +
                 "    <div class=\"container\">\n" +
                 "        <h1>Welcome to "+project.getName() +" Project!</h1>\n" +
-                "        <div class=\"project-name\">Project Name</div>\n" +
-                "        <div class=\"category\">Category</div>\n" +
+                "        <div class=\"project-name\">"+ project.getName() +"</div>\n" +
+                "        <div class=\"category\">"+ project.getCategory() + "</div>\n" +
                 "        <div class=\"description\">\n" +
                 "            "+ project.getDescription()  +".\n" +
                 "        </div>\n" +
