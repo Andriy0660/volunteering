@@ -218,7 +218,6 @@ public class BuildEmailMessage {
                 "\n" +
                 "        h1 {\n" +
                 "            text-align: center;\n" +
-                "            margin-bottom: 20px;\n" +
                 "        }\n" +
                 "\n" +
                 "        .project-name {\n" +
