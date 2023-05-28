@@ -257,9 +257,10 @@ public class BuildEmailMessage {
                 "        </div>\n" +
                 "        <div class=\"start-time\">Start Time:"+ project.getStartTime() +
                 "    </div>\n" +
-                "    <div>\n" +
-                "        <img src=\"" + "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pravda.com.ua%2Fpodcasts%2F6256c4b1e9aa1%2F2022%2F08%2F18%2F7363862%2F&psig=AOvVaw0-VyodYfWCS6Ci73PA4Mhs&ust=1685330321264000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCJDR7OqGl_8CFQAAAAAdAAAAABAt" + "\" alt=\"Project Image\">\n" +
-                "    </div>\n" +
+
+                "  <img src=\"https://img.pravda.com/images/doc/3/1/31d9bd6-299447088-865779764384214-3597062301583004683-n.jpeg\" alt=\"Project\n" +
+                " style=\"display:block;margin:auto;width:200px;height:200px;margin-top:20px;\">\n" +
+                "       \n" +
                 "</body>\n" +
                 "</html>\n";
     }
