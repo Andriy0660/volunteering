@@ -1,5 +1,6 @@
 package com.azn.tracking_volunteer_hours.email;
 
+import com.azn.tracking_volunteer_hours.dto.response.ReportResponse;
 import com.azn.tracking_volunteer_hours.entity.Project;
 
 import java.util.Random;
@@ -265,6 +266,50 @@ public class BuildEmailMessage {
                 "</body>\n" +
                 "</html>\n";
     }
+    public static String buildEmailReport(ReportResponse reportResponse) {
+        StringBuilder htmlPage = new StringBuilder("");
+        htmlPage.append("<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Email Statistics</title>\n" +
+                "    <style>\n" +
+                "        body {\n" +
+                "            font-family: Arial, sans-serif;\n" +
+                "            background-color: #f4f4f4;\n" +
+                "            padding: 20px;\n" +
+                "        }\n" +
+                "\n" +
+                "        .container {\n" +
+                "            max-width: 600px;\n" +
+                "            margin: 0 auto;\n" +
+                "            background-color: #ffffff;\n" +
+                "            border-radius: 5px;\n" +
+                "            padding: 40px;\n" +
+                "            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);\n" +
+                "        }\n" +
+                "\n" +
+                "        h1 {\n" +
+                "            text-align: center;\n" +
+                "            margin-bottom: 20px;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "    <div class=\"container\">\n" +
+                "        <h1>Your statistics for the last 7 days</h1>\n");
+                htmlPage.append("<h2>");
+                htmlPage.append("Total number of hours volunteered for last week: " + reportResponse.getAllHours() + " hours.<br><br>");
+                for (int i =0 ; i< reportResponse.getProjectResponses().size();i++){
+                    htmlPage.append(reportResponse.getProjectResponses().get(i).getProject().getName() + ": " );
+                    htmlPage.append(reportResponse.getProjectResponses().get(i).getHours() + " hours at");
+                    htmlPage.append(reportResponse.getProjectResponses().get(i).getTime() + "<br><br>");
+                }
 
+                htmlPage.append( "</body>\n" +
+                "</html>\n");
+
+        return htmlPage.toString();
+    }
 
 }
