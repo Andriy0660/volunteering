@@ -1,19 +1,18 @@
-# Tracking_volunteer_hours
+# Tracking volunteer hours
 
-Цей проект розроблений з використанням різних технологій та інструментів для створення rest-api.
+This project is developed using different technologies and tools to create rest-api.
 
-## Огляд
+## Review
 
-Проект заснований на Spring Boot та має наступний стек технологій:
+The project has the following technology stack:
 
 - Spring Boot 3.1.0
-- Spring Security 6.1.0 для забезпечення потужної безпеки додатку
-- JWT (JSON Web Tokens) для автентифікації та авторизації користувачів
-- Spring Data JPA для роботи з базою даних
+- Spring Security 6.1.0 to ensure strong application security
+- JWT (JSON Web Tokens) for authentication, authorization and identification of users
+- Spring Data JPA to work with the database
 - Hibernate для ORM (Object-Relational Mapping)
-- HTML та CSS для розробки вигляду електронних листів
-- Microsoft Azure для хостингу проекту
-- Microsoft SQL для зберігання даних
-- SMTP для відправки електронних листів
-- BCrypt для шифрування паролів
-
+- HTML та CSS to design the look of emails
+- Microsoft Azure for project hosting
+- Microsoft SQL for data storage
+- SMTP for sending emails
+- BCrypt for encrypting passwords
