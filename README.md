@@ -1,6 +1,7 @@
 # Tracking volunteer hours
 
-This project is developed using different technologies and tools to create rest-api.
+This project is developed for BEST Hackathon 2023 using different technologies and tools to create rest-api.
+Code `is not` clean because we had about 12 hours to design, write, and there was no time to do quality refactoring
 
 ## Review
 
